@@ -21,7 +21,9 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="example_Parking_lot.py" />
     <Compile Include="KNN_Parking.py" />
+    <Compile Include="ParkingLot.py" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="CNRPARK-Patches-150x150\A\busy\20150703_0805_14.jpg" />

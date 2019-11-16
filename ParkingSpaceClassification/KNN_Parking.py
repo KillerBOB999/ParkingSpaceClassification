@@ -13,7 +13,8 @@
 # IMPORTS------------------------------------------------------------------------------
 import sys
 import numpy as np
-import csv
+import ParkingLot
+import os
 #--------------------------------------------------------------------------------------
 
 #/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\
@@ -49,34 +50,10 @@ numIncorrect = 0            # Number of incorrectly labeled values
 #                   a format that is easy to work with
 #--------------------------------------------------------------------------------------
 def collectData(fileName, dataSet):
-    # Temporary variables
-    currentPixels = []      # Array of the pixels in the entry
-    currentClass = int()    # Labeled class of the entry
-
-    # Open the file and iterate through the data within
-    with open(fileName) as csv_file:
-        csv_reader = csv.reader(csv_file, delimiter=',')
-        rowIndex = 0
-        for row in csv_reader:
-            columnIndex = 0
-            if rowIndex != 0:   # Ignore the first row (human readable labels of column)
-                for column in row:
-                    if columnIndex != 0:    # If not class
-                        currentPixels.append(int(row[columnIndex]))
-                    else:                   # If class
-                        currentClass = int(row[columnIndex])
-                    columnIndex += 1
-
-                # Add to the dataSet
-                dataSet.append((currentPixels, currentClass))
-
-                # Reset temporary variables
-                currentPixels = []
-                currentClass = int()
-            
-            # Increment row index
-            rowIndex += 1
-
+    path = os.getcwd() + fileName
+    lot = ParkingLot.ParkingLot(path, 100);
+    for space in lot.getListOfParkingSpaces():
+        dataSet.append((space.getPixels(), space.getActual()))
     dataSet.pop(0)
 
 #/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\
@@ -166,7 +143,7 @@ def classify():
     # Step through the testDataSet and classify each entry
     for entry in testDataSet:
         # Possible classes and corresponding liklihood of entry being of that class
-        classVote = [[0, 0], [1, 0], [2, 0], [3, 0], [4, 0], [5, 0], [6, 0], [7, 0], [8, 0], [9, 0]]
+        classVote = [[0, 0], [1, 0]]
 
         # Find closes neighbors
         neighbors = findNeighbors(entry)
@@ -223,8 +200,9 @@ def main():
     global numIncorrect
 
     # Do data gathering stuff
-    collectData("MNIST_train.csv", trainingDataSet)
-    collectData("MNIST_test.csv", testDataSet)
+    print("Preprocessing data, please wait...")
+    collectData("\CNRPARK-Patches-150x150\A", trainingDataSet)
+    collectData("\CNRPARK-Patches-150x150\A", testDataSet)
 
     # Reinitialize globals to 0 for accuracy assurance
     numCorrect = 0
