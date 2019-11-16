@@ -4,7 +4,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>296c444e-3020-4f48-a672-d97aba670c7e</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>KNN_Parking.py</StartupFile>
+    <StartupFile>preprocessor.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -24,6 +24,9 @@
     <Compile Include="example_Parking_lot.py" />
     <Compile Include="KNN_Parking.py" />
     <Compile Include="ParkingLot.py" />
+    <Compile Include="preprocessor.py">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="CNRPARK-Patches-150x150\A\busy\20150703_0805_14.jpg" />
@@ -12610,6 +12613,9 @@
     <Content Include="CNRPARK-Patches-150x150\B\free\20150708_1805_6.jpg" />
     <Content Include="CNRPARK-Patches-150x150\B\free\20150708_1805_8.jpg" />
     <Content Include="CNRPARK-Patches-150x150\B\free\20150708_1805_9.jpg" />
+    <Content Include="CNRPARK-Pathces-150x150-Grayscale\classAndGrayscalePixelData.csv">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="MNIST_test.csv" />
     <Content Include="MNIST_train.csv" />
   </ItemGroup>
@@ -12621,6 +12627,7 @@
     <Folder Include="CNRPARK-Patches-150x150\B\" />
     <Folder Include="CNRPARK-Patches-150x150\B\busy\" />
     <Folder Include="CNRPARK-Patches-150x150\B\free\" />
+    <Folder Include="CNRPARK-Pathces-150x150-Grayscale\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
   <!-- Uncomment the CoreCompile target to enable the Build command in
