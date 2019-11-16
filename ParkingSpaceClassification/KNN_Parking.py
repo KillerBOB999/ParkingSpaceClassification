@@ -200,15 +200,21 @@ def main():
     global numIncorrect
 
     # Do data gathering stuff
-    print("Preprocessing data, please wait...")
+    print("Loading Training Dataset, Please Wait. . .")
     collectData("\CNRPARK-Patches-150x150\A", trainingDataSet)
+    print("Training Dataset Loaded Successfully")
+    print()
+    print("Loading Testing Dataset, Please Wait. . .")
     collectData("\CNRPARK-Patches-150x150\A", testDataSet)
+    print("Test Dataset Loaded Successfully")
+    print()
 
     # Reinitialize globals to 0 for accuracy assurance
     numCorrect = 0
     numIncorrect = 0
 
     # Start actual information display and KNN algorithm
+    print("Beginning KNN algorithm information display:")
     print("K = " + str(K_NumberOfNeighbors))
     print()
     classify()
