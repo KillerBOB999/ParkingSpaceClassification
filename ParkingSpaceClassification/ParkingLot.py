@@ -27,13 +27,14 @@ class ParkingSpace:
         self.estimated = value
     
     def getPngData(self, str):
-        pixel_list = imageio.read(str)
+        pixel_list = imageio.imread(str)
+        if pixel_list.shape != (150, 150, 3):
+            return None
         res = []
         for x in pixel_list:
-            for y in x:
-                for z in y:
-                    temp = (float(z[0])+float(z[1])+float(z[2]))/3
-                    res.append(temp)
+            for z in x:
+                temp = (float(z[0])+float(z[1])+float(z[2]))/3
+                res.append(temp)
         return res
             
             
@@ -50,14 +51,21 @@ class ParkingLot:
         random.seed(0)
         random.shuffle(self.list_of_paths)
         res = []
-        for x in range(number_of_items_to_return):
-            parking_space = ParkingSpace(self.list_of_paths[x])
-            if "busy" in self.list_of_paths[x]:
+        count = 0
+        index = 0
+        while count < number_of_items_to_return:
+            index +=1
+            parking_space = ParkingSpace(self.list_of_paths[index])
+            if parking_space.getPixels() == None:
+                continue
+            if "busy" in self.list_of_paths[index]:
                 parking_space.setActual(False)
             else:
                 parking_space.setActual(True)
             ParkingLot.TOTAL_COUNT +=1
             res.append(parking_space)
+            count +=1
+            print(count < number_of_items_to_return)
         return res
     
     def getItems(self, root):
