@@ -22,4 +22,4 @@ print(a.TOTAL_COUNT)
 print(a.TOTAL_VERIFIED)
 ## Getting the accuracy of the parkinglot object
 print(a.getAccuracy())
-print(a.getListOfParkingSpaces()[0].getName())
+print(a.getListOfParkingSpaces()[0].getPixels())

@@ -100,20 +100,20 @@ def AssignClusters(input_data,means_of_current_clusters,data_set):
     for x in range(0,len(input_data)):
         closest_cluster = -1
 #---- Iterates over input objs and finds the closest cluster
-            sum = 0
-            sum_two = 0
-            for z in range(0,len(input_data[x][0])):
-                temp = input_data[x][0][z]**2 
-                sum += temp + means_of_current_clusters[0][z]**2
-                sum_two += temp + means_of_current_clusters[1][z]**2
-            if math.sqrt(sum) < math.sqrt(sum_two):
-                closest = math.sqrt(sum) 
-                input_data[x][1] = closest
-                closest_cluster = 0
-            else:
-                closest = math.sqrt(sum_two) 
-                input_data[x][1] = closest
-                closest_cluster = 1
+        sum = 0
+        sum_two = 0
+        for z in range(0,len(input_data[x][0])):
+            temp = input_data[x][0][z]**2 
+            sum += temp + means_of_current_clusters[0][z]**2
+            sum_two += temp + means_of_current_clusters[1][z]**2
+        if math.sqrt(sum) < math.sqrt(sum_two):
+            closest = math.sqrt(sum) 
+            input_data[x][1] = closest
+            closest_cluster = 0
+        else:
+            closest = math.sqrt(sum_two) 
+            input_data[x][1] = closest
+            closest_cluster = 1
         input_data[x][2] = closest_cluster
 #---- Adds values to find the average
         new_clusters[closest_cluster][0] += input_data[x][1]
@@ -133,7 +133,7 @@ def AssignClusters(input_data,means_of_current_clusters,data_set):
 ##------------------------------------
 def main():
     
-    path = os.getcwd() + "\CNRPARK-Patches-150x150\A"
+    path = os.getcwd() + "\CNRPARK-Pathces-150x150-Grayscale\A"
     data_set = ParkingLot.ParkingLot(path,10)
 #---- Begin main loop for K Means Algorithm
     input_data = []

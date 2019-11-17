@@ -36,7 +36,7 @@ class ParkingSpace:
         name = contents[0]
         contents = contents[1:]
         pixel_list = (float(i) for i in contents)
-        return pixel_list,name
+        return list(pixel_list),name
 
     def setName(self, str):
         self.name = str
