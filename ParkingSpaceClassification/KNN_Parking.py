@@ -15,6 +15,7 @@ import sys
 import numpy as np
 import ParkingLot
 import os
+import multiprocessing
 #--------------------------------------------------------------------------------------
 
 #/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\
@@ -37,6 +38,8 @@ power = 2                   # Power used for Minkowsky distance measurement
 numCorrect = 0              # Number of correctly labeled values
 
 numIncorrect = 0            # Number of incorrectly labeled values
+
+numOfThreads = 50;
 #--------------------------------------------------------------------------------------
 
 #/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\
@@ -138,7 +141,7 @@ def findNeighbors(resident):
 # Description:      Classifies the entries in testDataSet using the KNN classification
 #                   algorithm and displays the actual and computed classes
 #--------------------------------------------------------------------------------------
-def classify():
+def classify(entry):
     # Give access to global variables
     global numCorrect
     global numIncorrect
@@ -146,36 +149,36 @@ def classify():
     global calculatedClass
 
     # Step through the testDataSet and classify each entry
-    for entry in range(0, len(testDataSet)):
-        # Possible classes and corresponding liklihood of entry being of that class
-        classVote = [[0, 0], [1, 0]]
+    #for entry in range(0, len(testDataSet)):
+    # Possible classes and corresponding liklihood of entry being of that class
+    classVote = [[0, 0], [1, 0]]
 
-        # Find closes neighbors
-        neighbors = findNeighbors(testDataSet[entry])
+    # Find closes neighbors
+    neighbors = findNeighbors(testDataSet[entry])
 
-        # Based upon the neighbors, update the likelihood of each class
-        for neighbor in neighbors:
-            for classLabel in classVote:
-                if classLabel[0] == neighbor[0][1]:
-                    classLabel[1] += 1 / neighbor[1]
+    # Based upon the neighbors, update the likelihood of each class
+    for neighbor in neighbors:
+        for classLabel in classVote:
+            if classLabel[0] == neighbor[0][1]:
+                classLabel[1] += 1 / neighbor[1]
 
-        # Determine the final classification
-        maxVoteWeight = 0       # Likeliness of the selected classification
-        finalVote = -1          # Selected classification
-        for Vote in classVote:
-            if Vote[1] > maxVoteWeight:
-                maxVoteWeight = Vote[1]
-                finalVote = Vote[0]
-        calculatedClass[entry] = finalVote
+    # Determine the final classification
+    maxVoteWeight = 0       # Likeliness of the selected classification
+    finalVote = -1          # Selected classification
+    for Vote in classVote:
+        if Vote[1] > maxVoteWeight:
+            maxVoteWeight = Vote[1]
+            finalVote = Vote[0]
+    calculatedClass[entry] = finalVote
 
-        # Update computational statistics
-        if finalVote == testDataSet[entry][1]:
-            numCorrect += 1
-        else:
-            numIncorrect += 1
+    # Update computational statistics
+    if finalVote == testDataSet[entry][1]:
+        numCorrect += 1
+    else:
+        numIncorrect += 1
 
-        # Display information
-        printData(testDataSet[entry], finalVote)
+    # Display information
+    printData(testDataSet[entry], finalVote)
 
 #/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\
 
@@ -204,10 +207,11 @@ def main():
     # Give access to global variables
     global numCorrect  
     global numIncorrect
+    global numOfThreads
 
     # Do data gathering stuff
     print("Loading Training Dataset, Please Wait. . .")
-    collectData("\CNRPARK-Patches-150x150-Grayscale\A", trainingDataSet, 500)
+    collectData("\CNRPARK-Patches-150x150-Grayscale\A", trainingDataSet, 100)
     print("Training Dataset Loaded Successfully")
     print()
     print("Loading Testing Dataset, Please Wait. . .")
@@ -223,7 +227,19 @@ def main():
     print("Beginning KNN algorithm information display:")
     print("K = " + str(K_NumberOfNeighbors))
     print()
-    classify()
+
+    # Begin multiprocessing for more rapid calculation
+    
+    
+    if __name__ == '__main__':
+        processes = []
+    for i in range(0, len(testDataSet)):
+        p = multiprocessing.Process(target=classify, args=(i,))
+        processes.append(p)
+        p.start()
+    for process in processes:
+        process.join()
+
     print()
     total = numCorrect + numIncorrect
     accuracy = numCorrect / total
