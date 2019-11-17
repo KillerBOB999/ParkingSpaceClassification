@@ -65,7 +65,6 @@ class ParkingLot:
             ParkingLot.TOTAL_COUNT +=1
             res.append(parking_space)
             count +=1
-            print(count < number_of_items_to_return)
         return res
     
     def getItems(self, root):
