@@ -6,7 +6,7 @@ import os
 ## First arguement is the path. DO NOT CHANGE THE FOLDER NAMES. it needs these to classify them
 ## Second arguement is the number of items to load. This is random items
 ## The busy and free folder names is how the py figures out what it is
-path = os.getcwd() + "\CNRPARK-Patches-150x150\A"
+path = os.getcwd() + "\CNRPARK-Pathces-150x150-Grayscale\A"
 a = ParkingLot.ParkingLot(path,10)
 
 
@@ -22,3 +22,4 @@ print(a.TOTAL_COUNT)
 print(a.TOTAL_VERIFIED)
 ## Getting the accuracy of the parkinglot object
 print(a.getAccuracy())
+print(a.getListOfParkingSpaces()[0].getName())

@@ -99,16 +99,21 @@ def AssignClusters(input_data,means_of_current_clusters,data_set):
     new_clusters = [[0,0],[0,0]]
     for x in range(0,len(input_data)):
         closest_cluster = -1
-        closest = 9999999999
 #---- Iterates over input objs and finds the closest cluster
-        for y in range(0,2):
             sum = 0
+            sum_two = 0
             for z in range(0,len(input_data[x][0])):
-                sum += input_data[x][0][z]**2 + means_of_current_clusters[y][z]**2
-            if math.sqrt(sum) < closest:
+                temp = input_data[x][0][z]**2 
+                sum += temp + means_of_current_clusters[0][z]**2
+                sum_two += temp + means_of_current_clusters[1][z]**2
+            if math.sqrt(sum) < math.sqrt(sum_two):
                 closest = math.sqrt(sum) 
                 input_data[x][1] = closest
-                closest_cluster = y
+                closest_cluster = 0
+            else:
+                closest = math.sqrt(sum_two) 
+                input_data[x][1] = closest
+                closest_cluster = 1
         input_data[x][2] = closest_cluster
 #---- Adds values to find the average
         new_clusters[closest_cluster][0] += input_data[x][1]

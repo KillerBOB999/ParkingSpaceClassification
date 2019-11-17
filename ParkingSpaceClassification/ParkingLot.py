@@ -1,15 +1,17 @@
 ## Ver 1.3
 
 import os
-import imageio
+import csv
 import random
-
 class ParkingSpace:
     
     def __init__(self, str):
-        self.pixels = self.getPngData(str)
+        self.pixels,self.name = self.getPngData(str)
         self.actual = False
         self.estimated = False
+    
+    def getName(self):
+        return self.name
     
     def getPixels(self):
         return self.pixels
@@ -27,16 +29,17 @@ class ParkingSpace:
         self.estimated = value
     
     def getPngData(self, str):
-        pixel_list = imageio.imread(str)
-        if pixel_list.shape != (150, 150, 3):
-            return None
-        res = []
-        for x in pixel_list:
-            for z in x:
-                temp = (float(z[0])+float(z[1])+float(z[2]))/3
-                res.append(temp)
-        return res
-            
+        contents = ""
+        with open(str) as data:
+            csv_reader = csv.reader(data)
+            contents = next(csv_reader)
+        name = contents[0]
+        contents = contents[1:]
+        pixel_list = (float(i) for i in contents)
+        return pixel_list,name
+
+    def setName(self, str):
+        self.name = str
             
 class ParkingLot:
     
@@ -51,20 +54,14 @@ class ParkingLot:
         random.seed(0)
         random.shuffle(self.list_of_paths)
         res = []
-        count = 0
-        index = 0
-        while count < number_of_items_to_return:
-            index +=1
-            parking_space = ParkingSpace(self.list_of_paths[index])
-            if parking_space.getPixels() == None:
-                continue
-            if "busy" in self.list_of_paths[index]:
+        for x in range(number_of_items_to_return):        
+            parking_space = ParkingSpace(self.list_of_paths[x])
+            if parking_space.getName() == "Available":
                 parking_space.setActual(False)
             else:
                 parking_space.setActual(True)
             ParkingLot.TOTAL_COUNT +=1
             res.append(parking_space)
-            count +=1
         return res
     
     def getItems(self, root):
@@ -72,7 +69,7 @@ class ParkingLot:
         for subdir, dirs, files in os.walk(root):
             temp = []
             for file in files:
-                if file[-4:] == '.jpg':
+                if file[-4:] == '.csv':
                     path = os.path.join(subdir, file)         
                     temp.append(path)    
             for x in temp:
