@@ -5,10 +5,11 @@ import csv
 import random
 class ParkingSpace:
     
-    def __init__(self, str):
+    def __init__(self, str, name):
         self.pixels,self.name = self.getPngData(str)
         self.actual = False
         self.estimated = False
+        self.file_name = name
     
     def getName(self):
         return self.name
@@ -55,7 +56,7 @@ class ParkingLot:
         random.shuffle(self.list_of_paths)
         res = []
         for x in range(number_of_items_to_return):        
-            parking_space = ParkingSpace(self.list_of_paths[x])
+            parking_space = ParkingSpace(self.list_of_paths[x],self.list_of_paths[x][-30:])
             if parking_space.getName() == "Available":
                 parking_space.setActual(False)
             else:
@@ -78,15 +79,39 @@ class ParkingLot:
         return res
     
     def setEstimatedOnParkingSpace(self,parking_space, value):
-        if parking_space.getEstimated() == value:
-            return
-        elif parking_space.getActual() == False and value == True:
-            ParkingLot.TOTAL_VERIFIED += 1
-            parking_space.setEstimated(value)
-        elif parking_space.getActual() == True and value == False:
-            ParkingLot.Total_VERIFIED -= 1
-            parking_space.setEstimated(value)
-    
+        print("setting estimated")
+        if parking_space.getEstimated() == None:
+            if value == True and parking_space.getActual() == True:
+                parking_space.setEstimated(value)
+                ParkingLot.TOTAL_VERIFIED +=1
+            elif value == False and parking_space.getActual() == False:
+                parking_space.setEstimated(value)
+                ParkingLot.TOTAL_VERIFIED +=1
+            else:
+                parking_space.setEstimated(value)
+        else:
+            if parking_space.getEstimated() == True:
+                if value == True and parking_space.getActual() == True:
+                    return
+                if value == False and parking_space.getActual() == True:
+                    parking_space.setEstimated(value)
+                    ParkingLot.TOTAL_VERIFIED-=1
+                if value == True and parking_space.getActual() == False:
+                    parking_space.setEstimated(value)
+                    ParkingLot.TOTAL_VERIFIED-=1
+            if parking_space.getEstimated() == False:
+                if value == False and parking_space.getActual() == False:
+                    ParkingLot.TOTAL_VERIFIED+=1
+                    return
+                elif value == True and parking_space.getActual() == False:
+                    parking_space.setEstimated(value)
+                    ParkingLot.TOTAL_VERIFIED-=1
+                else:
+                    parking_space.setEstimated(value)
+        
+  
+        
+        
     def getListOfParkingSpaces(self):
         return self.list_of_objs
     
