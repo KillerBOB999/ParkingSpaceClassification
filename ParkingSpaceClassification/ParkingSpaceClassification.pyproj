@@ -12613,9 +12613,6 @@
     <Content Include="CNRPARK-Patches-150x150\B\free\20150708_1805_6.jpg" />
     <Content Include="CNRPARK-Patches-150x150\B\free\20150708_1805_8.jpg" />
     <Content Include="CNRPARK-Patches-150x150\B\free\20150708_1805_9.jpg" />
-    <Content Include="CNRPARK-Pathces-150x150-Grayscale\classAndGrayscalePixelData.csv">
-      <SubType>Code</SubType>
-    </Content>
     <Content Include="MNIST_test.csv" />
     <Content Include="MNIST_train.csv" />
   </ItemGroup>
@@ -12628,6 +12625,12 @@
     <Folder Include="CNRPARK-Patches-150x150\B\busy\" />
     <Folder Include="CNRPARK-Patches-150x150\B\free\" />
     <Folder Include="CNRPARK-Pathces-150x150-Grayscale\" />
+    <Folder Include="CNRPARK-Pathces-150x150-Grayscale\A\" />
+    <Folder Include="CNRPARK-Pathces-150x150-Grayscale\A\busy\" />
+    <Folder Include="CNRPARK-Pathces-150x150-Grayscale\A\free\" />
+    <Folder Include="CNRPARK-Pathces-150x150-Grayscale\B\" />
+    <Folder Include="CNRPARK-Pathces-150x150-Grayscale\B\busy\" />
+    <Folder Include="CNRPARK-Pathces-150x150-Grayscale\B\free\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
   <!-- Uncomment the CoreCompile target to enable the Build command in

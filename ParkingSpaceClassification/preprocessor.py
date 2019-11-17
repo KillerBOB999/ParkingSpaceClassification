@@ -16,14 +16,14 @@ def getItems(root):
     return res
 
 def main():
-    root = os.getcwd() + "\CNRPARK-Patches-150x150"
-
+    root = os.getcwd() + "/CNRPARK-Patches-150x150"
+    count = 0
     list_of_paths = getItems(root)
-    print(len(list_of_paths))
-    with open(os.getcwd() + "\CNRPARK-Pathces-150x150-Grayscale\classAndGrayscalePixelData.csv", "w", newline='') as csv_file:
-        writer = csv.writer(csv_file, delimiter=',')
-        count = 0
-        for index in range(0, len(list_of_paths) - 1):
+    for index in range(0, len(list_of_paths)):
+        newFile = list_of_paths[index].replace("CNRPARK-Patches-150x150", "CNRPARK-Pathces-150x150-Grayscale")
+        newFile = newFile.replace(".jpg", ".csv")
+        with open(newFile, "w", newline='') as csv_file:
+            writer = csv.writer(csv_file, delimiter=',')
             res = []
             if "busy" in list_of_paths[index]:
                 res.append("Occupied")
