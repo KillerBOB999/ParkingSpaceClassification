@@ -24,9 +24,12 @@ trainingDataSet = [([],)]   # The dataset to be used, represented as an array of
                             # are defined as (arrayOfPixelValues, class)
 
 testDataSet = [([],)]       # The dataset to be used for testing the accuracy of the
-                            # implementation. Same structure as trainingDataSet
+                            # implementation. Same structure as trainingDataSet.
 
-K_NumberOfNeighbors = 7     # Number of neighbors for use in the KNN algorithm
+calculatedClass = []        # Parallel to testDataSet, represents the calculated class
+                            # of the entity in the data set at the same index
+
+K_NumberOfNeighbors = 10    # Number of neighbors for use in the KNN algorithm
 
 power = 2                   # Power used for Minkowsky distance measurement
                             #   NOTE: 1 = Manhattan distance, 2 = Euclidian distance
@@ -139,14 +142,16 @@ def classify():
     # Give access to global variables
     global numCorrect
     global numIncorrect
+    global testDataSet
+    global calculatedClass
 
     # Step through the testDataSet and classify each entry
-    for entry in testDataSet:
+    for entry in range(0, len(testDataSet)):
         # Possible classes and corresponding liklihood of entry being of that class
         classVote = [[0, 0], [1, 0]]
 
         # Find closes neighbors
-        neighbors = findNeighbors(entry)
+        neighbors = findNeighbors(testDataSet[entry])
 
         # Based upon the neighbors, update the likelihood of each class
         for neighbor in neighbors:
@@ -161,15 +166,16 @@ def classify():
             if Vote[1] > maxVoteWeight:
                 maxVoteWeight = Vote[1]
                 finalVote = Vote[0]
+        calculatedClass[entry] = finalVote
 
         # Update computational statistics
-        if finalVote == entry[1]:
+        if finalVote == testDataSet[entry][1]:
             numCorrect += 1
         else:
             numIncorrect += 1
 
         # Display information
-        printData(entry, finalVote)
+        printData(testDataSet[entry], finalVote)
 
 #/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\
 
@@ -201,7 +207,7 @@ def main():
 
     # Do data gathering stuff
     print("Loading Training Dataset, Please Wait. . .")
-    collectData("\CNRPARK-Patches-150x150-Grayscale\A", trainingDataSet, 100)
+    collectData("\CNRPARK-Patches-150x150-Grayscale\A", trainingDataSet, 500)
     print("Training Dataset Loaded Successfully")
     print()
     print("Loading Testing Dataset, Please Wait. . .")
