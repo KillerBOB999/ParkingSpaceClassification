@@ -8,7 +8,7 @@ class ParkingSpace:
     def __init__(self, str, name):
         self.pixels,self.name = self.getPngData(str)
         self.actual = False
-        self.estimated = False
+        self.estimated = None
         self.file_name = name
     
     def getName(self):
@@ -79,13 +79,12 @@ class ParkingLot:
         return res
     
     def setEstimatedOnParkingSpace(self,parking_space, value):
-        print("setting estimated")
         if parking_space.getEstimated() == None:
             if value == True and parking_space.getActual() == True:
                 parking_space.setEstimated(value)
                 ParkingLot.TOTAL_VERIFIED +=1
             elif value == False and parking_space.getActual() == False:
-                parking_space.setEstimated(value)
+                ParkingSpace.setEstimated(parking_space,value)
                 ParkingLot.TOTAL_VERIFIED +=1
             else:
                 parking_space.setEstimated(value)

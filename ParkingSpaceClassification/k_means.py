@@ -54,11 +54,12 @@ def DisplayOutput(input_data,means_of_current_clusters,data_set, original_means)
             final[y]["Final"] = False
         else:
             final[y]["Final"] = True
-    temp_list = data_set.getListOfParkingSpaces()
-    for y in final:
-        for x in range(len(input_data)-1):
-            if input_data[x][2] == y:
-                data_set.setEstimatedOnParkingSpace(temp_list[input_data[x][3]],y["Final"])
+    for y in range(2):
+        z = 0
+        for x in data_set.getListOfParkingSpaces():
+            if input_data[z][2] == y:
+                data_set.setEstimatedOnParkingSpace(x,final[y]["Final"])
+            z+=1
     print(final)
     for x in data_set.getListOfParkingSpaces():
         print(str(x.getActual())+" "+str(x.getEstimated()))
@@ -131,7 +132,7 @@ def AssignClusters(input_data,means_of_current_clusters,data_set):
 def main():
     
     path = os.getcwd() + "\CNRPARK-Pathces-150x150-Grayscale\A"
-    parking_lot = ParkingLot.ParkingLot(path,100)
+    parking_lot = ParkingLot.ParkingLot(path,1000)
     list_of_parkingspots = parking_lot.getListOfParkingSpaces()
 #---- Begin main loop for K Means Algorithm
     input_data = []

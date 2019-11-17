@@ -17,9 +17,7 @@ for x in a.getListOfParkingSpaces():
     ## This is important to have the parkinglot object do this so it can keep track of the accuracy
     a.setEstimatedOnParkingSpace(x,True)
     print(x.getEstimated())
-    print(x.getActual())
 print(a.TOTAL_COUNT)
 print(a.TOTAL_VERIFIED)
 ## Getting the accuracy of the parkinglot object
 print(a.getAccuracy())
-print(a.getListOfParkingSpaces()[0].getPixels())
