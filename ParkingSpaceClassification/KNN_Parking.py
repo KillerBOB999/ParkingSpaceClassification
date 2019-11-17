@@ -49,9 +49,9 @@ numIncorrect = 0            # Number of incorrectly labeled values
 # Description:      Performs file handling and converts the data from the file into
 #                   a format that is easy to work with
 #--------------------------------------------------------------------------------------
-def collectData(fileName, dataSet):
+def collectData(fileName, dataSet, sizeOfDataSet):
     path = os.getcwd() + fileName
-    lot = ParkingLot.ParkingLot(path, 100);
+    lot = ParkingLot.ParkingLot(path, sizeOfDataSet);
     for space in lot.getListOfParkingSpaces():
         dataSet.append((space.getPixels(), space.getActual()))
     dataSet.pop(0)
@@ -201,11 +201,11 @@ def main():
 
     # Do data gathering stuff
     print("Loading Training Dataset, Please Wait. . .")
-    collectData("\CNRPARK-Patches-150x150\A", trainingDataSet)
+    collectData("\CNRPARK-Patches-150x150-Grayscale\A", trainingDataSet, 100)
     print("Training Dataset Loaded Successfully")
     print()
     print("Loading Testing Dataset, Please Wait. . .")
-    collectData("\CNRPARK-Patches-150x150\A", testDataSet)
+    collectData("\CNRPARK-Patches-150x150-Grayscale\B", testDataSet, 100)
     print("Test Dataset Loaded Successfully")
     print()
 
