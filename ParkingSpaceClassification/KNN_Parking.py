@@ -16,6 +16,7 @@ import numpy as np
 import ParkingLot
 import os
 import multiprocessing
+from multiprocessing import Array
 #--------------------------------------------------------------------------------------
 
 #/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\
@@ -59,7 +60,7 @@ def collectData(fileName, dataSet, sizeOfDataSet):
     path = os.getcwd() + fileName
     lot = ParkingLot.ParkingLot(path, sizeOfDataSet);
     for space in lot.getListOfParkingSpaces():
-        dataSet.append((space.getPixels(), space.getActual()))
+        dataSet.append((space.getPixels(), float(space.getActual())))
     dataSet.pop(0)
 
 #/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\
@@ -107,6 +108,7 @@ def distanceMeasure(entry1, entry2):
 #                   between resident and each entry in trainingDataSet
 #--------------------------------------------------------------------------------------
 def findNeighbors(resident):
+    global trainingDataSet, testDataSet
     # Temporary variables
     neighbors = []      # [(trainingDataSetEntry, distanceMeasure)]
     index = 0           # For iterating through the trainingDataSet
@@ -115,6 +117,9 @@ def findNeighbors(resident):
     # Iterate through the trainingDataSet
     while index < count:
         # If we don't have enough neighbors to consider yet
+        print("Resident: ", resident)
+        print("Index: ", index)
+        print("Count: ", count)
         if len(neighbors) < K_NumberOfNeighbors:
             neighbors.append((trainingDataSet[index], distanceMeasure(trainingDataSet[index], resident)))
         # We have enough neighbors, so determine which we should keep
@@ -153,7 +158,8 @@ def classify(entry):
     # Possible classes and corresponding liklihood of entry being of that class
     classVote = [[0, 0], [1, 0]]
 
-    # Find closes neighbors
+    # Find closest neighbors
+    print("testDataSet[entry]: ", testDataSet[entry])
     neighbors = findNeighbors(testDataSet[entry])
 
     # Based upon the neighbors, update the likelihood of each class
@@ -205,49 +211,59 @@ def printData(entry, finalVote):
 #--------------------------------------------------------------------------------------
 def main():
     # Give access to global variables
-    global numCorrect  
-    global numIncorrect
-    global numOfThreads
+    global numCorrect, numIncorrect, trainingDataSet, testDataSet
 
-    # Do data gathering stuff
-    print("Loading Training Dataset, Please Wait. . .")
-    collectData("\CNRPARK-Patches-150x150-Grayscale\A", trainingDataSet, 100)
-    print("Training Dataset Loaded Successfully")
-    print()
-    print("Loading Testing Dataset, Please Wait. . .")
-    collectData("\CNRPARK-Patches-150x150-Grayscale\B", testDataSet, 100)
-    print("Test Dataset Loaded Successfully")
-    print()
-
-    # Reinitialize globals to 0 for accuracy assurance
-    numCorrect = 0
-    numIncorrect = 0
-
-    # Start actual information display and KNN algorithm
-    print("Beginning KNN algorithm information display:")
-    print("K = " + str(K_NumberOfNeighbors))
-    print()
-
-    # Begin multiprocessing for more rapid calculation
-    
-    
     if __name__ == '__main__':
-        processes = []
-    for i in range(0, len(testDataSet)):
-        p = multiprocessing.Process(target=classify, args=(i,))
-        processes.append(p)
-        p.start()
-    for process in processes:
-        process.join()
+        # Do data gathering stuff
+        print("Loading Training Dataset, Please Wait. . .")
+        collectData("\CNRPARK-Patches-150x150-Grayscale\A", trainingDataSet, 100)
+        print("Training Dataset Loaded Successfully")
+        print()
+        print("Loading Testing Dataset, Please Wait. . .")
+        collectData("\CNRPARK-Patches-150x150-Grayscale\B", testDataSet, 100)
+        print("Test Dataset Loaded Successfully")
+        print()
 
-    print()
-    total = numCorrect + numIncorrect
-    accuracy = numCorrect / total
-    print("Accuracy: " + str(accuracy))
-    print("Number correctly classified: " + str(numCorrect))
-    print("Number incorrectly classified: " + str(numIncorrect))
-    print("Total: " + str(total))
+        # Convert global variables to shareable variables
+        globalConvert()
+
+        # Reinitialize globals to 0 for accuracy assurance
+        numCorrect = 0
+        numIncorrect = 0
+
+        # Start actual information display and KNN algorithm
+        print("Beginning KNN algorithm information display:")
+        print("K = " + str(K_NumberOfNeighbors))
+        print()
+
+        # Begin multiprocessing for more rapid calculation
+        multiProcess()
+
+        print()
+        total = numCorrect + numIncorrect
+        accuracy = numCorrect / total
+        print("Accuracy: " + str(accuracy))
+        print("Number correctly classified: " + str(numCorrect))
+        print("Number incorrectly classified: " + str(numIncorrect))
+        print("Total: " + str(total))
 
 #/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\
+
+def globalConvert():
+    global testDataSet, trainingDataSet, calculatedClass
+    tempDataSet = Array('f', len(testDataSet))
+    tempEntry = Array('f', len(testDataSet[0][0]))
+    for i in range(0, len(testDataSet)):
+        temp[i] = testDataSet[i]
+    fish = 1+1
+
+
+def multiProcess():
+    global testDataSet
+    if __name__ == '__main__':
+        pool = multiprocessing.Pool()
+        pool.map(classify, range(0, len(testDataSet)))
+        pool.close()
+        pool.join()
 
 main()
