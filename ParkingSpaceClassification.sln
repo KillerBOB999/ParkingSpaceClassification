@@ -5,6 +5,8 @@ VisualStudioVersion = 16.0.29503.13
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "ParkingSpaceClassification", "ParkingSpaceClassification\ParkingSpaceClassification.pyproj", "{296C444E-3020-4F48-A672-D97ABA670C7E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSharpParkingSpaceClassification", "CSharpParkingSpaceClassification\CSharpParkingSpaceClassification.csproj", "{F0BFB4D2-AFE7-403D-8505-279666A73629}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -13,6 +15,10 @@ Global
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{296C444E-3020-4F48-A672-D97ABA670C7E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{296C444E-3020-4F48-A672-D97ABA670C7E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F0BFB4D2-AFE7-403D-8505-279666A73629}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F0BFB4D2-AFE7-403D-8505-279666A73629}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F0BFB4D2-AFE7-403D-8505-279666A73629}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F0BFB4D2-AFE7-403D-8505-279666A73629}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
