@@ -145,6 +145,9 @@ def classify():
     global testDataSet
     global calculatedClass
 
+    for i in range(0, len(testDataSet)):
+        calculatedClass.append(-1)
+
     # Step through the testDataSet and classify each entry
     for entry in range(0, len(testDataSet)):
         # Possible classes and corresponding liklihood of entry being of that class
@@ -189,7 +192,7 @@ def classify():
 # Description:      Display the formatted information to the screen
 #--------------------------------------------------------------------------------------
 def printData(entry, finalVote):
-    print("Desired class: " + str(entry[1]) + "\tComputed class: " + str(finalVote))
+    print("Desired class: " + str(int(entry[1])) + "\tComputed class: " + str(finalVote))
 
 #/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\
 
@@ -207,11 +210,11 @@ def main():
 
     # Do data gathering stuff
     print("Loading Training Dataset, Please Wait. . .")
-    collectData("\CNRPARK-Patches-150x150-Grayscale\A", trainingDataSet, 500)
+    collectData("\CNRPARK-Patches-150x150-Grayscale\A", trainingDataSet, 10)
     print("Training Dataset Loaded Successfully")
     print()
     print("Loading Testing Dataset, Please Wait. . .")
-    collectData("\CNRPARK-Patches-150x150-Grayscale\B", testDataSet, 100)
+    collectData("\CNRPARK-Patches-150x150-Grayscale\B", testDataSet, 10)
     print("Test Dataset Loaded Successfully")
     print()
 
