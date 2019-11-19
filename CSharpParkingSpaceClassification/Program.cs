@@ -71,7 +71,7 @@ namespace CSharpParkingSpaceClassification
                 {
                     KNN_Parking iteration = new KNN_Parking(lot, ref trainingDataSet, ref testDataSet, neighborCount, powLevel);
                     iteration.RunKNN();
-                    int fish = 0;
+                    Console.WriteLine();
                 }
             }
         }
