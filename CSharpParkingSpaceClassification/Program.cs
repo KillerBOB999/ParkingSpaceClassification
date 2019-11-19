@@ -13,7 +13,15 @@ namespace CSharpParkingSpaceClassification
         static int numCorrect = 0;
         static int numIncorrect = 0;
 
-        // DEFINE DISTANCE MEASURE HERE
+        static float DistanceMeasure(Tuple<List<float>, int, int> entry1, Tuple<List<float>, int, int> entry2)
+		{
+			float currentSum = 0;
+			for (int index = 0; index < entry1[0].Count; ++index)
+			{
+				currentSum += Math.Pow(entry1[0][index] - entry2[0][index], power);
+			}
+			return Math.Pow(currentSum, 0.5);
+		}
 
         static List<Tuple<int, float>> FindNeighbors(Tuple<List<float>, int, int> resident)
         {
