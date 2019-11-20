@@ -1,0 +1,13 @@
+number_of_samples,percentage_correct,number_of_misclassified,duration,distance_type
+Occupied,True,<bound method ParkingSpace.getEstimated of <ParkingLot.ParkingSpace object at 0x000001D2A9F06320>>
+Occupied,True,<bound method ParkingSpace.getEstimated of <ParkingLot.ParkingSpace object at 0x000001D2A9BF2CF8>>
+Occupied,True,<bound method ParkingSpace.getEstimated of <ParkingLot.ParkingSpace object at 0x000001D2ABAB84A8>>
+Occupied,True,<bound method ParkingSpace.getEstimated of <ParkingLot.ParkingSpace object at 0x000001D2ABEDA748>>
+Occupied,True,<bound method ParkingSpace.getEstimated of <ParkingLot.ParkingSpace object at 0x000001D2ABEDA860>>
+Occupied,True,<bound method ParkingSpace.getEstimated of <ParkingLot.ParkingSpace object at 0x000001D2ABAB8320>>
+O,c,c,u,p,i,e,d,",",T,r,u,e,",",F,a,l,s,e
+O,c,c,u,p,i,e,d,",",T,r,u,e,",",F,a,l,s,e
+O,c,c,u,p,i,e,d,",",T,r,u,e,",",F,a,l,s,e
+Occupied,True,<bound method ParkingSpace.getEstimated of <ParkingLot.ParkingSpace object at 0x000001D2A9DA6E80>>
+Occupied,True,<bound method ParkingSpace.getEstimated of <ParkingLot.ParkingSpace object at 0x000001D2AC2D6748>>
+Occupied,True,<bound method ParkingSpace.getEstimated of <ParkingLot.ParkingSpace object at 0x000001D2AC2D6CC0>>

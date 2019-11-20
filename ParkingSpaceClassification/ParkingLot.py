@@ -5,11 +5,14 @@ import csv
 import random
 class ParkingSpace:
     
-    def __init__(self, str, name):
-        self.pixels,self.name = self.getPngData(str)
+    def __init__(self, str):
+        self.pixels,self.name, = self.getPngData(str)
         self.actual = False
         self.estimated = None
-        self.file_name = name
+        self.file_name = str
+        
+    def getFileName(self):
+        return self.file_name
     
     def getName(self):
         return self.name
@@ -55,8 +58,8 @@ class ParkingLot:
         random.seed(0)
         random.shuffle(self.list_of_paths)
         res = []
-        for x in range(number_of_items_to_return):        
-            parking_space = ParkingSpace(self.list_of_paths[x],self.list_of_paths[x][-30:])
+        for x in range(0,number_of_items_to_return):        
+            parking_space = ParkingSpace(self.list_of_paths[x])
             if parking_space.getName() == "Available":
                 parking_space.setActual(False)
             else:
@@ -97,10 +100,8 @@ class ParkingLot:
                     ParkingLot.TOTAL_VERIFIED-=1
                 if value == True and parking_space.getActual() == False:
                     parking_space.setEstimated(value)
-                    ParkingLot.TOTAL_VERIFIED-=1
             if parking_space.getEstimated() == False:
                 if value == False and parking_space.getActual() == False:
-                    ParkingLot.TOTAL_VERIFIED+=1
                     return
                 elif value == True and parking_space.getActual() == False:
                     parking_space.setEstimated(value)
