@@ -1,0 +1,17 @@
+Occupied,True,<bound method ParkingSpace.getEstimated of <ParkingLot.ParkingSpace object at 0x000001D2ABAB8400>>
+Occupied,True,<bound method ParkingSpace.getEstimated of <ParkingLot.ParkingSpace object at 0x000001D2AD201208>>
+Occupied,True,<bound method ParkingSpace.getEstimated of <ParkingLot.ParkingSpace object at 0x000001D2AD2018D0>>
+Occupied,True,False
+Occupied,True,False
+Occupied,True,False
+D:\CSC_535\Final_project\ParkingSpaceClassification\ParkingSpaceClassification\CNRPARK-Patches-150x150-Grayscale\A\busy\20150703_1300_6.csv,True,False
+D:\CSC_535\Final_project\ParkingSpaceClassification\ParkingSpaceClassification\CNRPARK-Patches-150x150-Grayscale\A\busy\20150703_0930_5.csv,True,False
+D:\CSC_535\Final_project\ParkingSpaceClassification\ParkingSpaceClassification\CNRPARK-Patches-150x150-Grayscale\A\busy\20150703_1245_21.csv,True,False
+D:\CSC_535\Final_project\ParkingSpaceClassification\ParkingSpaceClassification\CNRPARK-Patches-150x150-Grayscale\A\busy\20150703_1300_6.csv,True,False
+D:\CSC_535\Final_project\ParkingSpaceClassification\ParkingSpaceClassification\CNRPARK-Patches-150x150-Grayscale\A\busy\20150703_0930_5.csv,True,False
+D:\CSC_535\Final_project\ParkingSpaceClassification\ParkingSpaceClassification\CNRPARK-Patches-150x150-Grayscale\A\busy\20150703_1245_21.csv,True,False
+D:\CSC_535\Final_project\ParkingSpaceClassification\ParkingSpaceClassification\CNRPARK-Patches-150x150-Grayscale\A\busy\20150703_1300_6.csv,True,False
+D:\CSC_535\Final_project\ParkingSpaceClassification\ParkingSpaceClassification\CNRPARK-Patches-150x150-Grayscale\A\busy\20150703_0930_5.csv,True,False
+D:\CSC_535\Final_project\ParkingSpaceClassification\ParkingSpaceClassification\CNRPARK-Patches-150x150-Grayscale\A\busy\20150703_1245_21.csv,True,False
+10,0.7,0.581815242767334,eucleadian
+10,0.7,0.581815242767334,eucleadian

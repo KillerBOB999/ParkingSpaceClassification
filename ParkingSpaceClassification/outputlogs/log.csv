@@ -1,0 +1,4 @@
+name_of_file,actual,estimated
+D:\CSC_535\Final_project\ParkingSpaceClassification\ParkingSpaceClassification\CNRPARK-Patches-150x150-Grayscale\A\busy\20150703_1300_6.csv,True,False
+D:\CSC_535\Final_project\ParkingSpaceClassification\ParkingSpaceClassification\CNRPARK-Patches-150x150-Grayscale\A\busy\20150703_0930_5.csv,True,False
+D:\CSC_535\Final_project\ParkingSpaceClassification\ParkingSpaceClassification\CNRPARK-Patches-150x150-Grayscale\A\busy\20150703_1245_21.csv,True,False
