@@ -8,8 +8,8 @@ namespace CSharpParkingSpaceClassification
     {
         static List<Tuple<List<double>, int>> trainingDataSet = new List<Tuple<List<double>, int>>();
         static List<Tuple<List<double>, int>> testDataSet = new List<Tuple<List<double>, int>>();
-        static string lot = "B";
-        static int trainSize = 1000;
+        static string lot = "A";
+        static int trainSize = 100;
         static int testSize = 100;
         
         static void CollectData(string fileName, ref List<Tuple<List<double>, int>> dataSet, int sizeOfDataSet, bool startFromBeginning)

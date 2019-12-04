@@ -88,14 +88,6 @@ namespace CSharpParkingSpaceClassification
                 {
                     new List<double>(){0, 0},
                     new List<double>(){1, 0},
-                    new List<double>(){2, 0},
-                    new List<double>(){3, 0},
-                    new List<double>(){4, 0},
-                    new List<double>(){5, 0},
-                    new List<double>(){6, 0},
-                    new List<double>(){7, 0},
-                    new List<double>(){8, 0},
-                    new List<double>(){9, 0},
                 };
                 List<Tuple<int, double>> neighbors = FindNeighbors(testDataSet[entry]);
 
@@ -128,7 +120,7 @@ namespace CSharpParkingSpaceClassification
 
         void SaveData()
         {
-            string filePath = @"./../../../Results/lot" + lot + "_train_" + 
+            string filePath = @"./../../../PostResults/lot" + lot + "_train_" + 
                 trainingDataSet.Count.ToString() + "-test_" + testDataSet.Count.ToString() + ".csv";
             string delimiter = ",";
             if (!File.Exists(filePath))

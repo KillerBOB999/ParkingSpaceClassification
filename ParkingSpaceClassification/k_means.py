@@ -61,7 +61,8 @@ def DisplayOutput(input_data,means_of_current_clusters,data_set, original_means,
             z+=1
     
     field_names = ['k','number_of_samples','percentage_correct','duration','distance_type']
-    writepath = 'D:\\CSC_535\Final_project\\ParkingSpaceClassification\ParkingSpaceClassification\\outputlogs\\classification_log.csv'
+    dirname = os.getcwd()
+    writepath = dirname + '\\postoutputlogs\\classification_log.csv'
     mode = 'a' if os.path.exists(writepath) else 'w'
     f = open(writepath, mode)
     field_names_for_log = ['name_of_file','actual','estimated']
@@ -72,8 +73,9 @@ def DisplayOutput(input_data,means_of_current_clusters,data_set, original_means,
     for x in final:
         output_data_writer.writerow({'number_of_samples':str(len(data_set.getListOfParkingSpaces())),'percentage_correct':str(data_set.getAccuracy()),'duration':str(end-start),'distance_type':'Manhattan','k':k})
     f.close()
-    
-    writepath = 'D:\\CSC_535\Final_project\\ParkingSpaceClassification\ParkingSpaceClassification\\outputlogs\\err_log.csv'
+
+    dirname = os.getcwd()
+    writepath = dirname + '\\postoutputlogs\\err_log.csv'
     mode = 'a' if os.path.exists(writepath) else 'w'
     p = open(writepath, mode)
     logs_writer = csv.DictWriter(p,fieldnames=field_names_for_log)
@@ -152,8 +154,9 @@ def AssignClusters(input_data,means_of_current_clusters,data_set,k):
 ## Main Function
 ##------------------------------------
 def main():
+    dirname = os.getcwd()
     for z in range(99,100):
-        path = 'D:\\CSC_535\\Final_project\\ParkingSpaceClassification\\ParkingSpaceClassification\\CNRPARK-Patches-150x150-Grayscale\\A'
+        path = dirname + '\\CNRPARK-Patches-150x150-Grayscale\\A'
         parking_lot = ParkingLot.ParkingLot(path,z)
     #---- Begin main loop for K Means Algorithm
         input_data = []
