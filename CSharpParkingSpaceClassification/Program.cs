@@ -1,17 +1,49 @@
-﻿using System;
+﻿// INFORMATION--------------------------------------------------------------------------
+// DEVELOPER:        Anthony Harris
+// SLATE:            Anthony999
+// DATE:             04 December 2019
+// PURPOSE:          Use the K Nearest Neighbors algorithm to classify entries of the
+//                   CNRPark dataset.
+//--------------------------------------------------------------------------------------
+
+// /\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\
+
+// IMPORTS------------------------------------------------------------------------------
+using System;
 using System.Collections.Generic;
 using System.IO;
+//--------------------------------------------------------------------------------------
 
 namespace CSharpParkingSpaceClassification
 {
     class Program
     {
+        // GLOBALS------------------------------------------------------------------------------
         static List<Tuple<List<double>, int>> trainingDataSet = new List<Tuple<List<double>, int>>();
         static List<Tuple<List<double>, int>> testDataSet = new List<Tuple<List<double>, int>>();
-        static string lot = "A";
-        static int trainSize = 100;
-        static int testSize = 100;
-        
+        static string lot = "A";    // Specifies which lot in the dataset to use
+        static int trainSize = 100; // Size of training dataset
+        static int testSize = 100;  // Size of testing dataset
+                                    // ----------------------------------------------------------
+
+        // /\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\
+
+        //  FUNCTION DESCRIPTION-----------------------------------------------------------------
+        //  Function Name:  collectData
+        //  Parameters:     fileName
+        //                      Use:    Used as the name of the file containing the current 
+        //                              dataset
+        //                  dataSet(either the Training or the Test dataset)
+        //                      Use:    Simply represents the desired dataset to work with
+        //                  sizeOfDataSet
+        //                      Use:    Represents desired number of entries in the data set
+        //                  startFromBeginning
+        //                      Use:    Specifies whether entries should be selected from the 
+        //                              beginning or the end of the data set
+        //  Returns:          N/A
+        //  Description:    Performs file handling and converts the data from the file into
+        //                  a format that is easy to work with
+        // --------------------------------------------------------------------------------------
         static void CollectData(string fileName, ref List<Tuple<List<double>, int>> dataSet, int sizeOfDataSet, bool startFromBeginning)
         {
             System.IO.DirectoryInfo root = new DirectoryInfo(@"./../../../" + fileName);
@@ -51,6 +83,17 @@ namespace CSharpParkingSpaceClassification
                 }
             }
         }
+        // --------------------------------------------------------------------------------------
+
+        // /\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\
+
+        // FUNCTION DESCRIPTION-----------------------------------------------------------------
+        // Function Name:   Main
+        // Parameters:      N/A
+        // Returns:         N/A
+        // Description:     The starting point of the program. Controls the progression of the
+        //                  program and displays some relevant information to the screen
+        // --------------------------------------------------------------------------------------
         static void Main(string[] args)
         {
             Console.WriteLine("Collecting Training Data, Please Wait. . .");
@@ -75,5 +118,6 @@ namespace CSharpParkingSpaceClassification
                 }
             }
         }
+        // --------------------------------------------------------------------------------------
     }
 }

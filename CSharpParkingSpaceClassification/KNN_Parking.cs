@@ -1,12 +1,27 @@
-﻿using System;
+﻿// INFORMATION--------------------------------------------------------------------------
+// DEVELOPER:        Anthony Harris
+// SLATE:            Anthony999
+// DATE:             04 December 2019
+// PURPOSE:          Act as KNN algorithm implementation
+//--------------------------------------------------------------------------------------
+
+// /\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\
+
+// IMPORTS------------------------------------------------------------------------------
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.IO;
+//--------------------------------------------------------------------------------------
+
+// /\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\
 
 namespace CSharpParkingSpaceClassification
 {
+    // 
     public class KNN_Parking
     {
+        // Define 
         List<Tuple<List<double>, int>> trainingDataSet;
         List<Tuple<List<double>, int>> testDataSet;
         List<int> classifications = new List<int>();
@@ -17,6 +32,7 @@ namespace CSharpParkingSpaceClassification
         double accuracy;
         string lot;
 
+        // Constructor
         public KNN_Parking(
                     string lotChoice,
                     ref List<Tuple<List<double>, int>> train, 
@@ -30,6 +46,20 @@ namespace CSharpParkingSpaceClassification
             lot = lotChoice;
         }
 
+        // FUNCTION DESCRIPTION-----------------------------------------------------------------
+        // Function Name:    distanceMeasure
+        // Parameters:  entry1
+        //                  Use:    Represents an entry in the trainingDataSet for use in
+        //                          calculating the distance between it and entry2
+        //              entry2
+        //                  Use:    Represents the current entry of the testDataSet for use
+        //                          in calculating the distance between it and entry1
+        // Returns:          A floating point representation of the 'distance measure' of the
+        //                   2 entries.
+        // Description:      For each element e of the entries, find the summation of the 
+        //                   absolute value of the difference bewteen e1 and e2 and then take
+        //                   the Nth root of that sum
+        //--------------------------------------------------------------------------------------
         double DistanceMeasure(Tuple<List<double>, int> entry1, Tuple<List<double>, int> entry2)
         {
             double currentSum = 0;
@@ -74,12 +104,26 @@ namespace CSharpParkingSpaceClassification
             return neighbors;
         }
 
+        //  FUNCTION DESCRIPTION-----------------------------------------------------------------
+        //  Function Name:    PrintData
+        //  Parameters:       index
+        //                      Use:    The current entry being considered
+        //  Returns:          N/A
+        //  Description:      Display the formatted information to the screen
+        // --------------------------------------------------------------------------------------
         void PrintData(ref int index)
         {
             Console.WriteLine("Desired Class: " + testDataSet[index].Item2.ToString() +
                                 "\tComputed Class: " + classifications[index].ToString());
         }
 
+        // FUNCTION DESCRIPTION-----------------------------------------------------------------
+        // Function Name:    Classify
+        // Parameters:       N/A
+        // Returns:          N/A 
+        // Description:      Classifies the entries in testDataSet using the KNN classification
+        //                   algorithm and displays the actual and computed classes
+        //--------------------------------------------------------------------------------------
         void Classify()
         {
             for (int entry = 0; entry < testDataSet.Count; ++entry)
@@ -118,6 +162,12 @@ namespace CSharpParkingSpaceClassification
             }
         }
 
+        // FUNCTION DESCRIPTION-----------------------------------------------------------------
+        // Function Name:    SaveData
+        // Parameters:       N/A
+        // Returns:          N/A 
+        // Description:      Saves the results in a .csv file
+        //--------------------------------------------------------------------------------------
         void SaveData()
         {
             string filePath = @"./../../../PostResults/lot" + lot + "_train_" + 
@@ -162,6 +212,12 @@ namespace CSharpParkingSpaceClassification
             File.AppendAllLines(filePath, new List<string>() { line });
         }
 
+        // FUNCTION DESCRIPTION-----------------------------------------------------------------
+        // Function Name:    RunKNN
+        // Parameters:       N/A
+        // Returns:          N/A 
+        // Description:      Starts the algorithm
+        //--------------------------------------------------------------------------------------
         public void RunKNN()
         {
             Console.WriteLine("Now beginning display of KNN algorithm information:");
