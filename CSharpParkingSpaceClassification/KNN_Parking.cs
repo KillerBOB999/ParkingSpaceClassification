@@ -21,7 +21,7 @@ namespace CSharpParkingSpaceClassification
     // 
     public class KNN_Parking
     {
-        // Define 
+        // Define the Global Scope variables
         List<Tuple<List<double>, int>> trainingDataSet;
         List<Tuple<List<double>, int>> testDataSet;
         List<int> classifications = new List<int>();
